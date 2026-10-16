@@ -48,6 +48,31 @@ Using an Ubuntu virtual machine, I am building a Python-based detector that read
 * [ ] Test the five-attempt alert threshold.
 * [ ] Document test results and lessons learned.
 
+### Milestone 1: SSH Failed-Login Detection
+
+**Status:** Completed and tested
+
+Implemented a Python script that reads SSH authentication events from the Ubuntu system journal, identifies failed-password events, extracts source IP addresses, and counts attempts by IP.
+
+**Test scenario:** Generated five controlled failed SSH login events from the local machine.
+
+**Expected result:** An alert when an IP reaches five failed attempts.
+
+**Observed result:**
+
+```text
+Total failed-password events: 5
+IP: 127.0.0.1 | Failed attempts: 5
+[ALERT] 127.0.0.1 has 5 failed attempts!
+```
+
+**Outcome:** The detector successfully identified the five events, grouped them under the source IP, and triggered the expected alert.
+
+**Current limitation:** The script counts matching events since midnight rather than using a rolling time window. It also scans existing journal entries when run, rather than continuously monitoring new events.
+
+**Next improvement:** Implement a configurable rolling time window and test how the detector handles events outside that window.
+
+
 ## Security and Testing
 
 All login tests are performed in a controlled virtual lab. The initial failed-login test uses the loopback address `127.0.0.1`, which refers to the local machine.
