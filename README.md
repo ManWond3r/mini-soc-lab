@@ -39,14 +39,20 @@ Using an Ubuntu virtual machine, I am building a Python-based detector that read
 
 ## Progress
 
-* [x] Set up the Ubuntu virtual machine.
+* [x] Set up the Ubuntu virtual machine in VirtualBox.
 * [x] Start the SSH service.
-* [x] Generate a controlled failed SSH login.
-* [x] Observe authentication failure events in system logs.
-* [ ] Resolve the log-filtering issue in the Python detector.
-* [ ] Implement and verify IP-based counting.
-* [ ] Test the five-attempt alert threshold.
-* [ ] Document test results and lessons learned.
+* [x] Generate controlled failed SSH login events.
+* [x] Identify failed-password events in the system journal.
+* [x] Build a Python detector for failed SSH logins.
+* [x] Extract source IP addresses and count failed attempts.
+* [x] Implement a ten-minute lookback window.
+* [x] Verify alert generation at the five-attempt threshold.
+* [ ] Implement continuous monitoring of new SSH events.
+* [ ] Test that events outside the detection window do not trigger alerts.
+* [ ] Improve error handling and document further test results.
+
+**Current status:** The Python detector successfully counts failed-password events by source IP within a ten-minute lookback window and raises an alert when the threshold of five attempts is reached. Continuous monitoring is not yet implemented.
+
 
 ### Milestone 1: SSH Failed-Login Detection
 
